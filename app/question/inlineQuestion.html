@@ -1,0 +1,12 @@
+
+    <!--<td class="text-center"><img class="icon-image" src="q.isSolved==true?resource(dir: 'images', file: 'ok.png'):resource(dir: 'images', file: 'no.png')" /></td>-->
+    <td class="text-center"><img class="icon-image" ng-if="question.isSolved" src="../assets/images/ok.png" /><img class="icon-image" ng-if="question.isSolved==false" src="../assets/images/no.png" /></td>
+    <td class="text-center">{{question.question.value}}</td>
+    <td class="text-justify"><a href="question/show/{{question.id}}">{{question.title}}</a></td>
+    <td class="text-justify">
+        <span ng-repeat="t in question.tags">
+            <a href="tag/show/{{t.id}}">{{t.label}}</a>
+        </span>
+    </td>
+    <td class="text-center">{{question.question.date}}</td>
+    <td class="text-center"><a href="user/show/{{question.question.user.id}}">{{question.user.username}}</a></td>

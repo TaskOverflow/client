@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <section class="row">
+        <h1 class="col-sm-offset-1 col-xs-10">{{ 'home_welcome' | translate }}</h1>
+
+        <p class="col-xs-12 col-sm-offset-1 col-sm-10 text-justify">{{ 'home_presentation' | translate }}</p>
+
+        <h1 class="col-sm-offset-2 col-xs-8 page-title">{{ 'home_nav_questions' | translate }}</h1>
+        <div class="col-xs-offset-1 col-xs-10">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-center">{{ 'message_solved' | translate }}</th>
+                    <th class="text-center">{{ 'message_value' | translate }}</th>
+                    <th class="text-center">{{ 'message_question' | translate }}</th>
+                    <th class="text-center">{{ 'message_tags' | translate }}</th>
+                    <th class="text-center">{{ 'message_date' | translate }}</th>
+                    <th class="text-center">{{ 'message_author' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="question in questions" ng-include src="'question/inlineQuestion.html'" ng-controller="QuestionCtrl">
+                    </tr>
+                </tbody>
+
+            </table>
+            <div ></div>
+        </div>
+
+    </section>
+</div>
