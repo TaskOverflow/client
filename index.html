@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>TaskOverflow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--<base href="/"/>-->
+    <link rel="icon" href="favicon.ico" type="image/x-ico" />
+
+    <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/grails.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="stylesheets/mobile.css">
+    <link rel="stylesheet" href="stylesheets/application.css">
+    <link rel="stylesheet" href="stylesheets/errors.css">
+</head>
+<body ng-app="TaskOverflowApp">
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/#">
+                <i class="fa grails-icon">
+                    <asset:image src="favicon.png"/>
+                </i> TaskOverflow
+            </a>
+        </div>
+        <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
+            <ul class="nav navbar-nav navbar-right">
+                <li><g:link controller="question"><g:message code="home.nav.questions"/></g:link></li>
+                <li><g:link controller="tag"><g:message code="home.nav.tags"/></g:link></li>
+                <li><g:link controller="badge"><g:message code="home.nav.badges"/></g:link></li>
+                <li><g:link controller="user"><g:message code="home.nav.users"/></g:link></li>
+                <sec:ifNotLoggedIn>
+                    <li><g:link controller="user" action="create"><g:message code="home.nav.signin"/></g:link></li>
+                    <li><g:link controller="login"><g:message code="home.nav.login"/></g:link></li>
+                </sec:ifNotLoggedIn>
+                <sec:ifLoggedIn>
+                    <li><g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}"><sec:loggedInUserInfo field="username"/></g:link></li>
+                    <li><g:link controller="logout"><g:message code="home.nav.logout"/></g:link></li>
+                    <li class="gold"><g:link controller="question" action="create"><g:message code="home.nav.ask"/></g:link></li>
+                </sec:ifLoggedIn>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div ng-view></div>
+
+<div class="footer" role="contentinfo"></div>
+
+<div id="spinner" class="spinner" style="display:none;">
+    <g:message code="spinner.alt" default="Loading&hellip;"/>
+</div>
+
+<!-- Vendor: Javascripts -->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="javascripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="javascripts/bootstrap.js"></script>
+<script type="text/javascript" src="javascripts/application.js"></script>
+
+<!-- Vendor: Angular, followed by our custom Javascripts -->
+<script src="javascripts/angular.min.js"></script>
+<script src="javascripts/angular-route.min.js"></script>
+<script src="javascripts/angular-translate.min.js"></script>
+
+<!-- Angular app -->
+<script src="app.js"></script>
+<script src="controllers/QuestionCtrl.js"></script>
+<script src="controllers/BadgeCtrl.js"></script>
+<script src="controllers/TagCtrl.js"></script>
+<script src="controllers/UserCtrl.js"></script>
+<script src="controllers/ErrorCtrl.js"></script>
+
+</body>
+</html>
