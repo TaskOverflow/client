@@ -2,28 +2,53 @@
 
 angular.module('TaskOverflowApp.question', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/question', {
-        templateUrl: 'question/question.html',
-        controller: 'QuestionCtrl',
-        controllerAs: 'qctrl'
-    });
-}])
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/question', {
+                templateUrl: 'question/question.html',
+                controller: 'QuestionCtrl'
+            })
+            .when('/question/show/:questionid*', {
+                templateUrl: '/question/show.html',
+                controller: 'QuestionShowCtrl'
+            })
+            .when('/question/editmessage/:messageid*', {
+                templateUrl: '/question/editmessage.html',
+                controller: 'MessageEditCtrl'
+            })
+        ;
+    }])
 
-.controller('QuestionCtrl', function ( $scope, $translate, $location, $http ) {
-    $scope.bob = "Je m'appelle Bob.";
+    .controller('QuestionCtrl', function ( $scope, $location, $http ) {
+        $scope.bob = "Je m'appelle Bob.";
 
-    $scope.questions = null;
-    $scope.carre = [1,2,3,4];
-    $scope.carre[1] = 3;
+        $http.get('http://localhost:8080/question').
+        then(function(response) {
+            $scope.questions = response.data;
+        });
+    })
 
-    $http.get('http://localhost:8080/question').
-    then(function(response) {
-        $scope.questions = response.data;
-        console.log($scope.questions);
-    });
+    .controller('QuestionShowCtrl', function ( $scope, $location, $http, $routeParams ) {
+        $scope.bob = "Je m'appelle Bob.";
 
-    this.showme = function() {
-        console.log($scope.questions);
-    }
-});
+        $scope.addCom = function() {
+            console.log("commentaire ajouté");
+            // "/comMessage/create?params="['questionId':a.question.id,'messageId':a.id]"
+        };
+
+        $http.get('http://localhost:8080/question/show/'+$routeParams.questionid).
+        then(function(response) {
+            $scope.question = response.data;
+        });
+    })
+
+    .controller('MessageEditCtrl', function ( $scope, $location, $http ) {
+        $scope.bob = "Je m'appelle Bob.";
+
+        $http.get('http://localhost:8080/myMessage/edit/'+$routeParams.questionid).
+        then(function(response) {
+            $scope.questions = response.data;
+        });
+    })
+
+;

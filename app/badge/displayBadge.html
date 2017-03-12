@@ -1,0 +1,13 @@
+<div class="jumbotron col-sm-offset-2 col-xs-12 col-sm-8">
+    <div class="row">
+        <img class="col-sm-3 col-xs-4 fix-image" src="/assets/images/badge.png" alt="image"/>
+        <div class="row col-sm-9 col-xs-8"><h2 class="text-center col-xs-12">{{badge.label}}</h2>
+        <h3 class="col-xs-12">{{badge.description | translate}}</h3></div>
+    </div>
+
+    <strong>{{ 'home_badge_owners' | translate }}</strong>
+    <span ng-repeat="user in badge.users"><a href="/user/show/{{user.id}}">{{user.username}}</a> </span>
+    <span ng-if="badge.users.length==0">
+        {{ 'other_none' | translate }}
+    </span>
+</div>

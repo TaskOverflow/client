@@ -21,7 +21,7 @@ angular.module('TaskOverflowApp.security', ['ngRoute'])
     };
 
     this.isLoggedIn = function () {
-
+        return this.username != null;
     };
 
     this.isAuthorized = function (authorizedRole) {

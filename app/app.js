@@ -23,7 +23,8 @@ angular.module('TaskOverflowApp', [
               templateUrl: 'question/question.html',
               controller: 'QuestionCtrl'
             })
-            .otherwise({redirectTo: '/error'});
+            //.otherwise({redirectTo: '/error'})
+            ;
 
         $locationProvider.html5Mode({
           enabled: true,
@@ -150,4 +151,10 @@ angular.module('TaskOverflowApp', [
         });
         $translateProvider.preferredLanguage('en');
     }]
-);
+)
+
+.filter('reverse', function() {
+    return function(items) {
+            return items.slice().reverse();
+    };
+});

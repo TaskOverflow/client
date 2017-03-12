@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <section class="row">
+        <h1 class="text-center page-title">{{user.username}}
+            <!--<g:if test="${sec.username()==this.user.username}">
+                <g:link class="btn btn-default form-inline my-btn" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+            </g:if>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <g:form class="form-inline" style="display: inline-block" controller="user" action="ban" resource="${this.user}" method="PUT">
+                    <g:submitButton class="btn btn-default form-inline" name="ban" value="${this.user.accountLocked==true?g.message(code:'message.unban'):g.message(code:'message.ban')}" />
+                </g:form>
+            </sec:ifAllGranted>-->
+        </h1>
+        <span ng-include="'/user/displayProfile'" ng-init="profil=user.profil"></span>
+        <div class="row">
+            <h1 class="col-sm-offset-2 page-title">{{'other_mysuccess'|translate}}</h1>
+            <div class="col-xs-offset-1 col-xs-10">
+                <div class="col-xs-12">
+                    <div class="jumbotron badgeSize">
+                        <div class="row">
+                            <div class="text-center col-xs-12 page-title">
+                                {{'other_reputation'|translate}}
+                            </div>
+                            <div class="col-xs-12">
+                                <h2 class="text-center page-title">{{user.reputation}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <span ng-repeat="badge in user.badges" ng-include="'/badge/displaySimpleBadge'"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h1 class="col-sm-offset-2 page-title">{{'other_myquestions'|translate}}</h1>
+            <div class="col-xs-offset-1 col-xs-10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-center">{{'message_solved'|translate}}</th>
+                        <th class="text-center">{{'message_value'|translate}}</th>
+                        <th class="text-center">{{'message_question'|translate}}</th>
+                        <th class="text-center">{{'message_date'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="question in user.questions.length < 10 ? user.questions : user.questions.slice(0,10)" ng-include="'/question/displayInlineSimpleQuestion'"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="col-sm-offset-2 page-title">{{'other_mymessages'|translate}}</h1>
+            <div class="col-xs-offset-1 col-xs-10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-center">{{'message_value'|translate}}</th>
+                        <th class="text-center">{{'message_content'|translate}}</th>
+                        <th class="text-center">{{'message_date'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="message in user.messages.length < 10 ? user.messages : user.messages.slice(0,10)" ng-include="'/question/displayInlineMessage'"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

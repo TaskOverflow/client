@@ -1,0 +1,16 @@
+<div class="jumbotron col-xs-12 col-sm-12">
+    <div class="row">
+        <img class="col-sm-6 my-image" src="/assets/images/favicon.png" alt="image"/>
+        <div class="row col-sm-6"><h2 class="text-center col-xs-12">{{tag.label}}</h2></div>
+    </div>
+
+    <strong>{{'home_nav_questions' | translate}}</strong>
+    <ul class="my-list">
+        <li ng-repeat="question in tag.questions">
+            <a href="/question/show/{{question.id}}">{{question.title}}</a>
+        </li>
+    </ul>
+    <span ng-if="tag.questions.length==0">
+        {{ 'other_none' | translate }}
+    </span>
+</div>

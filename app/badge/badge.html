@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <section class="row">
-        BADGES
+        <h1 class="col-sm-offset-2 page-title">{{ "home_nav_badges" | translate }}</h1>
+        <span ng-repeat="badge in badges | reverse" ng-include src="'/badge/displayBadge'"></span>
     </section>
 </div>
