@@ -1,5 +1,3 @@
-
-    <!--<td class="text-center"><img class="icon-image" src="q.isSolved==true?resource(dir: 'images', file: 'ok.png'):resource(dir: 'images', file: 'no.png')" /></td>-->
     <td class="text-center"><img class="icon-image" ng-if="question.isSolved" src="../assets/images/ok.png" /><img class="icon-image" ng-if="question.isSolved==false" src="../assets/images/no.png" /></td>
     <td class="text-center">{{question.question.value}}</td>
     <td class="text-justify"><a href="/question/show/{{question.id}}">{{question.title}}</a></td>

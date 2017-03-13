@@ -1,0 +1,26 @@
+<div id="login">
+    <div class="panel panel-danger col-xs-offset-1 col-sm-offset-4 col-md-offset-4 col-xs-10 col-sm-4 col-md-4 form-group">
+        <h1 class="text-center page-title">{{'springSecurity_login_header' | translate}}</h1>
+
+        <form id="loginForm" class="form panel-body" autocomplete="off">
+            <p>
+                <label for="username">{{'springSecurity_login_username_label'|translate}}:</label>
+                <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" ng-model="session.username"/>
+            </p>
+
+            <p>
+                <label for="password">{{'springSecurity_login_password_label'|translate}}:</label>
+                <input type="password" class="form-control form-inline" name="${passwordParameter ?: 'password'}" id="password" ng-model="session.password" />
+            </p>
+
+            <p class="text-center">
+                <button type="button" ng-click="session.login()">{{'springSecurity_login_button' | translate}}</button>
+            </p>
+        </form>
+    </div>
+</div>
+<script>
+    (function() {
+        document.forms['loginForm'].elements['${usernameParameter ?: 'username'}'].focus();
+    })();
+</script>

@@ -21,6 +21,7 @@ angular.module('TaskOverflowApp.question', ['ngRoute'])
 
     .controller('QuestionCtrl', function ( $scope, $location, $http ) {
         $scope.bob = "Je m'appelle Bob.";
+        $scope.questions = [];
 
         $http.get('http://localhost:8080/question').
         then(function(response) {
@@ -28,8 +29,9 @@ angular.module('TaskOverflowApp.question', ['ngRoute'])
         });
     })
 
-    .controller('QuestionShowCtrl', function ( $scope, $location, $http, $routeParams ) {
+    .controller('QuestionShowCtrl', function ( $scope, $location, $http, $routeParams, $window, Session, $route ) {
         $scope.bob = "Je m'appelle Bob.";
+        $scope.text = "";
 
         $scope.addCom = function() {
             console.log("commentaire ajouté");
@@ -40,6 +42,72 @@ angular.module('TaskOverflowApp.question', ['ngRoute'])
         then(function(response) {
             $scope.question = response.data;
         });
+
+        $scope.isCurrentUser = function() {
+            return $scope.question!=undefined && Session.isCurrentUser($scope.question.user);
+        };
+
+        $scope.getCurrentUser = function() {
+            return Session.getCurrentUser();
+        };
+
+        $scope.solve = function() {
+            $http({
+                url: 'http://localhost:8080/question/solve',
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Bearer ' + $window.sessionStorage.token
+                },
+                data : {
+                    qId: $scope.question.id
+                },
+                params : {
+                    qId: $scope.question.id
+                }
+            }).then(function success(response) {
+                $route.reload();
+            }, function error(response) {
+            });
+        };
+
+        $scope.addAnswer = function() {
+
+            console.log($scope.question.text);
+            $http({
+                url: 'http://localhost:8080/answerMessage/add',
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Bearer ' + $window.sessionStorage.token
+                },
+                data : {
+                    question: {
+                        id: $scope.question.id
+                    },
+                    user: {
+                        id: $window.sessionStorage.userid
+                    },
+                    text: $scope.question.text
+                },
+                params : {
+                    qId: $scope.question.id,
+                    uId: $window.sessionStorage.userid,
+                    text: $scope.question.text
+                }
+            }).then(function success(response) {
+                console.log(response);
+                $route.reload();
+            }, function error(response) {
+                console.log(response);
+            });
+        };
+
+        $scope.isLoggedIn = function() {
+            return Session.isLoggedIn();
+        };
+
+
     })
 
     .controller('MessageEditCtrl', function ( $scope, $location, $http ) {

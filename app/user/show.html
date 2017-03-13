@@ -1,16 +1,9 @@
 <div class="container-fluid">
     <section class="row">
-        <h1 class="text-center page-title">{{user.username}}
-            <!--<g:if test="${sec.username()==this.user.username}">
-                <g:link class="btn btn-default form-inline my-btn" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-            </g:if>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <g:form class="form-inline" style="display: inline-block" controller="user" action="ban" resource="${this.user}" method="PUT">
-                    <g:submitButton class="btn btn-default form-inline" name="ban" value="${this.user.accountLocked==true?g.message(code:'message.unban'):g.message(code:'message.ban')}" />
-                </g:form>
-            </sec:ifAllGranted>-->
+        <h1 class="text-center page-title">{{user.username}} <a ng-if="isCurrentUser()" class="btn btn-default form-inline my-btn" href="/user/edit/{{user.profil.id}}">{{'other_edit'|translate}}</a>
+            <a ng-if="hasRole('ROLE_ADMIN')" class="btn btn-default form-inline my-btn" ng-click="ban()">{{user.accountLocked==true?'message_unban':'message_ban'|translate}}</a>
         </h1>
-        <span ng-include="'/user/displayProfile'" ng-init="profil=user.profil"></span>
+        <div ng-include="'/user/displayProfile'" class="jumbotron col-xs-12"></div>
         <div class="row">
             <h1 class="col-sm-offset-2 page-title">{{'other_mysuccess'|translate}}</h1>
             <div class="col-xs-offset-1 col-xs-10">

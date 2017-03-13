@@ -1,5 +1,35 @@
 <div class="container-fluid">
     <section class="row">
-        QUESTION
+        <div class="col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10">
+            <h1 class="page-title">
+                <img class="icon-image" src="{{question.isSolved==true?'/assets/images/ok.png':'/assets/images/no.png'}}" />
+                {{question.title}}
+                <button ng-if="isCurrentUser()&&question.isSolved==false" style="display: inline-block" class="btn btn-default form-inline" name="solve" ng-click="solve()">{{'message_solved'|translate}}</button>
+            </h1>
+            <h2>{{'home_nav_tags'|translate}}:
+                <span ng-repeat="t in question.tags"><a href="/tag/show/{{t.id}}">{{t.label}}</a> </span>
+            </h2>
+
+            <span ng-include="'/question/displayQuestion'" ng-init="message=question.question"></span>
+
+            <span ng-repeat="message in question.answers">
+                <span ng-include="'/question/displayAnswer'"></span>
+            </span>
+
+
+            <div class="jumbotron col-xs-12 form-group" ng-if="isLoggedIn()">
+                <form>
+                    <div class="row">
+                        <label for="content">{{'message_answer'|translate}}</label>
+                        <textarea style="height: 100px;" class="form-control" id="content" ng-model="question.text"></textarea>
+                    </div>
+                    <br/>
+                    <div class="row text-center">
+                        <button ng-click="addAnswer()" >{{'other_send'|translate}}</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </section>
 </div>

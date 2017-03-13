@@ -1,0 +1,34 @@
+<h1 class="col-xs-offset-1 col-sm-offset-2 page-title"><a href="/user/show/{{profile.userid}}">{{'other_back'|translate}}</a> > {{"other_edit"|translate}} </h1>
+
+<div id="edit-profile" class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 content panel panel-danger text-center" role="main">
+
+    <div class="panel-body" ng-if="isCurrentUser()">
+
+        <form id="loginForm" class="form panel-body" autocomplete="off">
+            <p>
+                <label for="email">{{'other_email'|translate}}:</label>
+                <input type="text" class="form-control" name="'email'" id="email" ng-model="profile.email"/>
+            </p>
+
+            <p>
+                <label for="firstname">{{'other_firstname'|translate}}:</label>
+                <input type="text" class="form-control" name="'firstname'" id="firstname" ng-model="profile.firstname"/>
+            </p>
+
+            <p>
+                <label for="lastname">{{'other_lastname'|translate}}:</label>
+                <input type="text" class="form-control" name="'lastname'" id="lastname" ng-model="profile.lastname"/>
+            </p>
+
+            <p>
+                <label for="image">{{'profile_image_label'|translate}}:</label>
+                <input type="text" class="form-control" name="'image'" id="image" ng-model="profile.image"/>
+            </p>
+
+            <p class="text-center">
+                <button type="button" ng-click="save()">{{'other_send' | translate}}</button>
+            </p>
+        </form>
+    </div>
+
+</div>

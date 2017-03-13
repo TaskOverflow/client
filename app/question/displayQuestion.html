@@ -1,0 +1,48 @@
+<div class="panel panel-success">
+    <div class="panel-body questionStyle">
+        <div class="questionStyle">
+            <div class="col-xs-3">
+                <div class="col-xs-12 text-center">
+                    <!--TODO
+                                        <g:form controller="myMessage" action="vote" method="post">
+                                            <g:hiddenField name="qId" value="${a.question.id}" />
+                                            <g:hiddenField name="mId" value="${a.id}" />
+                                            <g:hiddenField name="inc" value="1" />
+                                            <g:submitButton name="▲" class="btn btn-success btn-lg"/>
+                                        </g:form>
+                    -->
+                    <button name="▲" class="btn btn-success btn-lg"></button>
+                </div>
+                <div class="col-xs-12 text-center"><h2>{{question.question.value}}</h2></div>
+                <div class="col-xs-12 text-center">
+                    <!--TODO
+                                        <g:form controller="myMessage" action="vote" method="post">
+                                            <g:hiddenField name="qId" value="${a.question.id}" />
+                                            <g:hiddenField name="mId" value="${a.id}" />
+                                            <g:hiddenField name="inc" value="-1" />
+                                            <g:submitButton name="▼" class="btn btn-danger btn-lg"/>
+                                        </g:form>
+                          -->
+                    <button name="▼" class="btn btn-danger btn-lg"></button>
+
+                </div>
+            </div>
+            <div class="col-xs-9 text-justify">{{question.question.content}}</div>
+            <span ng-if="isLoggedIn()">
+                <div class="col-xs-12"><br/></div>
+                <div class="col-xs-12 text-justify coms"><a href="#" ng-click="addCom()">{{'message_addcom'|translate}}</a></div>
+            </span>
+            <span ng-repeat="com in question.question.coms" ng-include="'/question/displayCom'" ></span>
+        </div>
+    </div>
+    <div class="panel-footer container-fluid">
+        <div class="text-left col-xs-6">
+            <a ng-if="isCurrentUser()" class="btn btn-default form-inline my-btn" href="/question/editmessage/{{question.question.id}}">{{"other_edit" | translate}}</a>
+        </div>
+        <div class="text-right col-xs-6">
+            <img class="small-profil-image" src="{{question.user.profil.image != '0' ? question.user.profil.image : '/assets/images/user.png'}}" />
+            <a href="/user/show/{{question.user.id}}">{{question.user.username}}</a>, {{question.question.date}}
+        </div>
+
+    </div>
+</div>

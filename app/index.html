@@ -31,8 +31,7 @@
   <link rel="stylesheet" href="assets/stylesheets/errors.css">
 </head>
 <body>
-
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="SessionCtrl as session">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -54,12 +53,12 @@
             <li><a href="/badge" translate="home_nav_badges">error</a></li>
             <li><a href="/user" translate="home_nav_users">error</a></li>
 
-            <li ng-if="!isLoggedIn()"><a href="/user/create" translate="home_nav_signin">error</a></li>
-            <li ng-if="!isLoggedIn()"><a href="/login" translate="home_nav_login">error</a></li>
+            <li ng-if="!session.isLog()"><a href="/register" translate="home_nav_signin">error</a></li>
+            <li ng-if="!session.isLog()"><a href="/login" translate="home_nav_login">error</a></li>
 
-            <li ng-if="isLoggedIn()"><a href="/user/show">{{username}}</a></li>
-            <li ng-if="isLoggedIn()"><a href="/logout" translate="home_nav_logout">error</a></li>
-            <li ng-if="isLoggedIn()" class="gold"><a href="/question/create" translate="home_nav_ask">error</a></li>
+            <li ng-if="session.isLog()"><a href="/user/show/{{session.userid()}}">{{session.username()}}</a></li>
+            <li ng-if="session.isLog()"><a href="/" ng-click="session.logout()" translate="home_nav_logout">error</a></li>
+            <li ng-if="session.isLog()" class="gold"><a href="/question/create" translate="home_nav_ask">error</a></li>
         </ul>
       </div>
     </div>
@@ -84,10 +83,11 @@
   <script src="badge/badge.js"></script>
   <script src="tag/tag.js"></script>
   <script src="user/user.js"></script>
+  <script src="session/session.js"></script>
   <script src="error/error.js"></script>
   <script src="components/security/session.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 </body>
-</html>
+</ht

@@ -9,14 +9,31 @@ angular.module('TaskOverflowApp', [
   'TaskOverflowApp.tag',
   'TaskOverflowApp.badge',
   'TaskOverflowApp.user',
+  'TaskOverflowApp.session',
   'TaskOverflowApp.error',
   'TaskOverflowApp.security',
   'TaskOverflowApp.version'
 ])
 
+/*
+.factory('authInterceptor', function ($rootScope, $window) {
+    return {
+            request: function (config) {
+                    config.headers = config.headers || {};
+                    if ($window.sessionStorage.token) {
+                            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                    }
+                    return config;
+            }
+    };
+})
+*/
+
 .config(
     ['$locationProvider', '$routeProvider', '$translateProvider', '$resourceProvider', '$httpProvider', function($locationProvider, $routeProvider, $translateProvider, $resourceProvider, $httpProvider) {
         $locationProvider.hashPrefix('!');
+
+        //$httpProvider.interceptors.push('authInterceptor');
 
         $routeProvider
             .when("/", {
@@ -35,6 +52,11 @@ angular.module('TaskOverflowApp', [
         default_paginate_prev: 'Previous',
         default_paginate_next: 'Next',
 
+        springSecurity_login_username_label: 'Username',
+        springSecurity_login_password_label: 'Password',
+        springSecurity_login_header: 'Login',
+        springSecurity_login_remember_me_label: 'Remember me',
+                springSecurity_login_button: 'Send',
         home_welcome: 'Welcome to TaskOverflow',
         home_presentation: 'Congratulations, you have successfully accessed to the magic TaskOverflow website! At the moment this is a wonderful page, feel free to like it or redirect yourself to an other place or share whatever content with your friends. Below is a list of links to ask some interesting questions.',
         home_nav_questions: 'Questions',
@@ -58,7 +80,8 @@ angular.module('TaskOverflowApp', [
         other_mymessages: 'My messages',
         other_back: 'Back',
         other_new: 'New',
-        other_send: 'Send',
+                other_send: 'Send',
+                other_edit: 'Edit',
         message_solved: 'Solved',
         message_author: 'Author',
         message_value: 'Value',
@@ -94,6 +117,12 @@ angular.module('TaskOverflowApp', [
         default_paginate_prev: 'Précédent',
         default_paginate_next: 'Suivant',
 
+        springSecurity_login_username_label: 'Pseudo',
+        springSecurity_login_password_label: 'Mot de passe',
+        springSecurity_login_header: 'Connexion',
+        springSecurity_login_remember_me_label: 'Se souvenir',
+                springSecurity_login_button: 'Valider',
+
         home_welcome: 'Bienvenue sur TaskOverflow',
         home_presentation: 'Félicitations, vous avez réussi à accéder au site Web magique TaskOverflow ! En ce moment c\'est une page merveilleuse, n\'hésitez pas à l\'aimer ou à vous rediriger vers un autre endroit ou partager son contenu avec vos amis. Voici une liste de liens pour poser des questions intéressantes.',
         home_nav_questions: 'Questions',
@@ -117,7 +146,8 @@ angular.module('TaskOverflowApp', [
         other_reputation: 'Réputation',
         other_back: 'Retour',
         other_new: 'Nouveau',
-        other_send: 'Envoyer',
+                other_send: 'Envoyer',
+                other_edit: 'Editer',
         message_solved: 'Résolu',
         message_author: 'Auteur',
         message_value: 'Valeur',
@@ -155,6 +185,6 @@ angular.module('TaskOverflowApp', [
 
 .filter('reverse', function() {
     return function(items) {
-            return items.slice().reverse();
+            return items? items.slice().reverse() : [];
     };
 });
