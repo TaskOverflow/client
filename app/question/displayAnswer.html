@@ -3,34 +3,17 @@
         <div class="answerStyle">
             <div class="col-xs-3">
                 <div class="col-xs-12 text-center">
-                    <!--TODO
-                                        <g:form controller="myMessage" action="vote" method="post">
-                                            <g:hiddenField name="qId" value="${a.question.id}" />
-                                            <g:hiddenField name="mId" value="${a.id}" />
-                                            <g:hiddenField name="inc" value="1" />
-                                            <g:submitButton name="▲" class="btn btn-success btn-lg"/>
-                                        </g:form>
-                    -->
-                    <button name="▲" class="btn btn-success btn-lg"></button>
+                    <button class="btn btn-success btn-lg" ng-click="vote(question.id,message.id,1)">▲</button>
                 </div>
                 <div class="col-xs-12 text-center"><h2>{{message.value}}</h2></div>
                 <div class="col-xs-12 text-center">
-                    <!--TODO
-                                        <g:form controller="myMessage" action="vote" method="post">
-                                            <g:hiddenField name="qId" value="${a.question.id}" />
-                                            <g:hiddenField name="mId" value="${a.id}" />
-                                            <g:hiddenField name="inc" value="-1" />
-                                            <g:submitButton name="▼" class="btn btn-danger btn-lg"/>
-                                        </g:form>
-                          -->
-                    <button name="▼" class="btn btn-danger btn-lg"></button>
-
+                    <button class="btn btn-danger btn-lg" ng-click="vote(question.id,message.id,-1)">▼</button>
                 </div>
             </div>
             <div class="col-xs-9 text-justify">{{message.content}}</div>
             <span ng-if="isLoggedIn()">
                 <div class="col-xs-12"><br/></div>
-                <div class="col-xs-12 text-justify coms"><a href="" ng-click="addCom()">{{'message_addcom'|translate}}</a></div>
+                <div class="col-xs-12 text-justify coms"><input type="text" class="col-xs-8" ng-model="message.newcom"/><button class="col-xs-4" ng-click="addCom(message.newcom,message.id)">{{'message_addcom'|translate}}</button></div>
             </span>
             <span ng-repeat="com in message.coms" ng-include="'/question/displayCom'" ></span>
         </div>

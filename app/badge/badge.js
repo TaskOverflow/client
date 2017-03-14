@@ -15,19 +15,19 @@ angular.module('TaskOverflowApp.badge', ['ngRoute'])
     ;
 }])
 
-.controller('BadgeCtrl', function ( $scope, $location, $http ) {
+.controller('BadgeCtrl', function ( $scope, $location, $rootScope ) {
     $scope.bob = "Je m'appelle Bob.";
 
-    $http.get('http://localhost:8080/badge').
+    $http.get($rootScope.SERVER_URL+'badge').
     then(function(response) {
         $scope.badges = response.data;
     });
 })
 
-.controller('BadgeShowCtrl', function ( $scope, $location, $http, $routeParams ) {
+.controller('BadgeShowCtrl', function ( $scope, $location, $http, $routeParams, $rootScope ) {
     $scope.bob = "Je m'appelle Bob.";
 
-    $http.get('http://localhost:8080/badge/show/'+$routeParams.badgeid).
+    $http.get($rootScope.SERVER_URL+'badge/show/'+$routeParams.badgeid).
     then(function(response) {
         $scope.badge = response.data;
     });

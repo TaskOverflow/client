@@ -17,10 +17,10 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
     ;
 }])
 
-    .controller('LoginCtrl', function ( $scope, $location, $http, $window ) {
+    .controller('LoginCtrl', function ( $scope, $location, $http, $window, $rootScope ) {
         var session = this;
         session.login = function() {
-            $http.post('http://localhost:8080/api/login', {
+            $http.post($rootScope.SERVER_URL+'api/login', {
                 username: session.username,
                 password: session.password
             }).then(function success(response) {
@@ -28,7 +28,7 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
                 $window.sessionStorage.username = response.data.username;
                 $window.sessionStorage.roles = response.data.roles;
                 $window.sessionStorage.isLog = true;
-                $http.post('http://localhost:8080/user/userid', {
+                $http.post($rootScope.SERVER_URL+'user/userid', {
                     username: response.data.username
                 }).then(function (response) {
                     $window.sessionStorage.userid = response.data.id;
@@ -39,10 +39,10 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             });
         }
     })
-    .controller('RegisterCtrl', function ( $scope, $location, $http, $window ) {
+    .controller('RegisterCtrl', function ( $scope, $location, $http, $window, $rootScope ) {
         var session = this;
         session.register = function() {
-            $http.post('http://localhost:8080/user/save', {
+            $http.post($rootScope.SERVER_URL+'user/save', {
                 username: session.username,
                 password: session.password
             }).then(function success(response) {
@@ -52,7 +52,7 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             });
         }
     })
-    .controller('SessionCtrl', function ( $scope, $location, $http, $window ) {
+    .controller('SessionCtrl', function ( $scope, $location, $http, $window, $rootScope ) {
         var session = this;
 
         session.userid = function () {
@@ -77,7 +77,6 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             $window.sessionStorage.roles = null;
             $window.sessionStorage.userid = null;
             $window.sessionStorage.isLog = false;
-            console.log($window.sessionStorage.isLog);
             $window.location.href ='/';
         };
 
@@ -98,7 +97,7 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
         };
 
         this.isLoggedIn = function() {
-            return $window.sessionStorage.isLog;
+            return $window.sessionStorage.isLog==undefined ? false : $window.sessionStorage.isLog=="true" ? true : false;
         };
 
     });

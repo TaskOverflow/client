@@ -1,0 +1,23 @@
+<br/>
+<div id="create-question" class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 content panel panel-default" role="main">
+    <h1 class="page-title">{{'home_nav_ask'|translate}}</h1>
+    <form class="form panel-body">
+        <fieldset class="form">
+            <label for="title">{{'question_title_label'|translate}}:</label>
+            <input name="title" id="title" type="text" class="form-control" ng-model="question.title"/>
+
+            <label for="tagselection">{{'home_nav_tags'|translate}}:</label>
+            <div id="tagselection" class=" row">
+
+                <button ng-repeat="tag in tagList" ng-click="tag.selected= !tag.selected" class="btn {{tag.selected==true?'btn-success':'btn-default'}}" >{{tag.label}}</button>
+
+            </div>
+
+            <label for="content">{{'questionMessage_content_label'|translate}}:</label>
+            <textarea name="content" class="form-control" id="content" ng-model="question.content" style="height: 200px"></textarea>
+        </fieldset>
+        <fieldset class="text-center">
+            <button name="create" class="btn btn-default" ng-click="create()">{{'other_send'|translate}}</button>
+        </fieldset>
+    </form>
+</div>

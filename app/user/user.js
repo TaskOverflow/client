@@ -19,30 +19,30 @@ angular.module('TaskOverflowApp.user', ['ngRoute'])
         ;
     }])
 
-    .controller('UserCtrl', function ( $scope, $location, $http, Session ) {
+    .controller('UserCtrl', function ( $scope, $location, $http, Session, $rootScope ) {
         $scope.bob = "Je m'appelle Bob.";
 
-        $http.get('http://localhost:8080/user').
+        $http.get($rootScope.SERVER_URL+'user').
         then(function(response) {
             $scope.users = response.data;
         });
     })
 
-    .controller('UserShowCtrl', function ( $scope, $location, $http, $routeParams, $window, $route, Session ) {
+    .controller('UserShowCtrl', function ( $scope, $location, $http, $routeParams, $window, $route, Session, $rootScope ) {
         $scope.bob = "Je m'appelle Bob.";
 
         $scope.isCurrentUser = function() {
             return Session.isCurrentUser($scope.user);
         };
 
-        $http.get('http://localhost:8080/user/show/'+$routeParams.userid).
+        $http.get($rootScope.SERVER_URL+'user/show/'+$routeParams.userid).
         then(function(response) {
             $scope.user = response.data;
         });
 
         $scope.ban = function() {
             $http({
-                url: 'http://localhost:8080/user/ban',
+                url: $rootScope.SERVER_URL+'user/ban',
                 method: 'PUT',
                 headers: {
                     'Content-Type' : 'application/json',
@@ -64,10 +64,10 @@ angular.module('TaskOverflowApp.user', ['ngRoute'])
         };
     })
 
-    .controller('UserEditCtrl', function ( $scope, $location, $http, $routeParams, Session, $route, $window ) {
+    .controller('UserEditCtrl', function ( $scope, $location, $http, $routeParams, Session, $route, $window, $rootScope ) {
         $scope.bob = "Je m'appelle Bob.";
 
-        $http.get('http://localhost:8080/profile/show/'+$routeParams.profileid).
+        $http.get($rootScope.SERVER_URL+'profile/show/'+$routeParams.profileid).
         then(function(response) {
             $scope.profile = response.data;
             $scope.user = {username: response.data.username};
@@ -79,7 +79,7 @@ angular.module('TaskOverflowApp.user', ['ngRoute'])
 
         $scope.save = function() {
             $http({
-                url: 'http://localhost:8080/profile/update',
+                url: $rootScope.SERVER_URL+'profile/update',
                 method: 'PUT',
                 headers: {
                     'Content-Type' : 'application/json',

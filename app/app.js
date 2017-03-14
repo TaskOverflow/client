@@ -11,23 +11,14 @@ angular.module('TaskOverflowApp', [
   'TaskOverflowApp.user',
   'TaskOverflowApp.session',
   'TaskOverflowApp.error',
-  'TaskOverflowApp.security',
   'TaskOverflowApp.version'
 ])
 
-/*
-.factory('authInterceptor', function ($rootScope, $window) {
-    return {
-            request: function (config) {
-                    config.headers = config.headers || {};
-                    if ($window.sessionStorage.token) {
-                            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-                    }
-                    return config;
-            }
-    };
+.run(function ($rootScope) {
+    $rootScope.SERVER_URL="http://localhost:8080/";
+    $rootScope.CONF_SERVER_URL="https://raw.githubusercontent.com/TaskOverflow/conf/master/allok/";       // if you want to test with all features
+    //$rootScope.CONF_SERVER_URL="https://raw.githubusercontent.com/TaskOverflow/conf/master/alldown/";   // if you want to test without features
 })
-*/
 
 .config(
     ['$locationProvider', '$routeProvider', '$translateProvider', '$resourceProvider', '$httpProvider', function($locationProvider, $routeProvider, $translateProvider, $resourceProvider, $httpProvider) {
@@ -109,7 +100,7 @@ angular.module('TaskOverflowApp', [
         profile_email_label: 'Email',
         profile_image_label: 'Image',
 
-        question_title_label: 'Titel',
+        question_title_label: 'Title',
 
         access_forbidden: 'Access forbidden.'
         });

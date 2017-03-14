@@ -1,0 +1,13 @@
+<h1 class="col-sm-offset-2 page-title"><a href="/question/show/{{message.questionid}}">{{'other_back'|translate}}</a> > {{'other_new'|translate}} </h1>
+<div class="jumbotron col-sm-offset-2 col-xs-12 col-sm-8 form-group">
+    <form>
+        <div class="row">
+            <label for="content">{{'message_content'|translate}}</label>
+            <textarea class="form-control" name="content" id="content" ng-model="message.content"></textarea>
+        </div>
+        <br/>
+        <div class="row text-center">
+            <button ng-click="saveMessage()">{{'other_send'|translate}}</button>
+        </div>
+    </form>
+</div>

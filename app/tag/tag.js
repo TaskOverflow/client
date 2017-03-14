@@ -15,13 +15,13 @@ angular.module('TaskOverflowApp.tag', ['ngRoute'])
     ;
 }])
 
-.controller('TagCtrl', function ( $scope, $location, $http ) {
+.controller('TagCtrl', function ( $scope, $location, $http, $rootScope ) {
     $scope.bob = "Je m'appelle Bob.";
 
     $scope.tags1 = [];
     $scope.tags2 = [];
 
-    $http.get('http://localhost:8080/tag').
+    $http.get($rootScope.SERVER_URL+'tag').
     then(function(response) {
         $scope.tags = response.data;
         var side = false;
@@ -35,10 +35,10 @@ angular.module('TaskOverflowApp.tag', ['ngRoute'])
     });
 })
 
-.controller('TagShowCtrl', function ( $scope, $location, $http, $routeParams ) {
+.controller('TagShowCtrl', function ( $scope, $location, $http, $routeParams, $rootScope ) {
     $scope.bob = "Je m'appelle Bob.";
 
-    $http.get('http://localhost:8080/tag/show/'+$routeParams.tagid).
+    $http.get($rootScope.SERVER_URL+'tag/show/'+$routeParams.tagid).
     then(function(response) {
         $scope.tag = response.data;
     });

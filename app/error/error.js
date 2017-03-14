@@ -9,10 +9,10 @@ angular.module('TaskOverflowApp.error', ['ngRoute'])
     });
 }])
 
-.controller('ErrorCtrl', function ( $scope, $location, $http ) {
+.controller('ErrorCtrl', function ( $scope, $location, $http, $rootScope ) {
     $scope.bob = "Je m'appelle Bob.";
 
-    $http.get('http://localhost:8080/error').
+    $http.get($rootScope.SERVER_URL+'error').
     then(function(response) {
         $scope.errors = response.data;
     });
