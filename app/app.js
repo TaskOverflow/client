@@ -11,12 +11,14 @@ angular.module('TaskOverflowApp', [
   'TaskOverflowApp.user',
   'TaskOverflowApp.session',
   'TaskOverflowApp.error',
+  'TaskOverflowApp.utils',
   'TaskOverflowApp.version'
 ])
 
 .run(function ($rootScope) {
     $rootScope.SERVER_URL="http://localhost:8080/";
     $rootScope.CONF_SERVER_URL="http://localhost:666/";
+    $rootScope.FEATURES={};
 })
 
 .config(

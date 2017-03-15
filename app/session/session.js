@@ -52,7 +52,7 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             });
         }
     })
-    .controller('SessionCtrl', function ( $scope, $location, $http, $window, $rootScope ) {
+    .controller('SessionCtrl', function ( $scope, $location, $http, $window, $rootScope, Features ) {
         var session = this;
 
         session.userid = function () {
@@ -79,6 +79,19 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             $window.sessionStorage.isLog = false;
             $window.location.href ='/';
         };
+
+        session.isAvailable = function(feature) {
+            return Features.isAvailable(feature);
+        };
+
+        session.isAvailable = function(feature) {
+            return Features.isAvailable(feature);
+        };
+
+        session.debug = function () {
+            console.log("COUCOU");
+            console.log($rootScope.FEATURES);
+        }
 
     })
 
