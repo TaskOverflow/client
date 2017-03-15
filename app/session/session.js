@@ -52,8 +52,19 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
             });
         }
     })
-    .controller('SessionCtrl', function ( $scope, $location, $http, $window, $rootScope, Features ) {
+    .controller('SessionCtrl', function ( $scope, $location, $http, $window, $rootScope, $interval, Features ) {
         var session = this;
+        var services = ['question','user','tag','badge'];
+
+        for(var i = 0 ; i < services.length ; ++i)
+            Features.check(services[i]);
+
+        $interval( function(services){
+            console.log("Service availability update");
+            for(var i = 0 ; i < services.length ; ++i)
+                Features.check(services[i]);
+
+        }.bind(null,services), 5000);
 
         session.userid = function () {
             return $window.sessionStorage.userid == undefined ? null : $window.sessionStorage.userid;
@@ -87,11 +98,6 @@ angular.module('TaskOverflowApp.session', ['ngRoute'])
         session.isAvailable = function(feature) {
             return Features.isAvailable(feature);
         };
-
-        session.debug = function () {
-            console.log("COUCOU");
-            console.log($rootScope.FEATURES);
-        }
 
     })
 

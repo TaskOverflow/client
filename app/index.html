@@ -51,7 +51,7 @@
             <li><a href="/question" ng-show="session.isAvailable('question')" translate="home_nav_questions"></a></li>
             <li><a href="/tag" ng-show="session.isAvailable('tag')" translate="home_nav_tags"></a></li>
             <li><a href="/badge" ng-show="session.isAvailable('badge')" translate="home_nav_badges"></a></li>
-            <li><a href="/user" ng-show="session.isAvailable('user')" translate="home_nav_users"></a></li>
+            <li><a href="/user" translate="home_nav_users"></a></li>
 
             <li ng-if="!session.isLog()" ng-show="session.isAvailable('user')"><a href="/register" translate="home_nav_signin"></a></li>
             <li ng-if="!session.isLog()" ng-show="session.isAvailable('user')"><a href="/login" translate="home_nav_login"></a></li>

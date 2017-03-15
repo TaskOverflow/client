@@ -23,7 +23,7 @@ angular.module('TaskOverflowApp.question', ['ngRoute'])
         ;
     }])
 
-    .controller('QuestionCtrl', function ( $scope, $location, $http, $rootScope ) {
+    .controller('QuestionCtrl', function ( $scope, $location, $http, $rootScope, Features ) {
         $scope.bob = "Je m'appelle Bob.";
         $scope.questions = [];
 
@@ -31,6 +31,10 @@ angular.module('TaskOverflowApp.question', ['ngRoute'])
         then(function(response) {
             $scope.questions = response.data;
         });
+
+        $scope.isAvailable = function(feature) {
+            return Features.isAvailable(feature);
+        };
     })
 
     .controller('QuestionCreateCtrl', function ( $scope, $location, $http, $routeParams, $window, Session, $route, $rootScope ) {

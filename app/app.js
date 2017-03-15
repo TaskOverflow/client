@@ -19,6 +19,7 @@ angular.module('TaskOverflowApp', [
     $rootScope.SERVER_URL="http://localhost:8080/";
     $rootScope.CONF_SERVER_URL="http://localhost:666/";
     $rootScope.FEATURES={};
+    $rootScope.HEALTHCHECK={};
 })
 
 .config(
@@ -86,7 +87,7 @@ angular.module('TaskOverflowApp', [
         badges_superman_desc: 'Get 100 points from gamification.',
         badges_hercule_desc: 'Get 50 points from gamification.',
         badges_nbone_desc: 'Write your first message.',
-
+        stupid_question: 'Do you like cats?',
         user_username_label: 'Username',
         user_password_label: 'Password',
 
@@ -159,7 +160,7 @@ angular.module('TaskOverflowApp', [
         myMessage_content_label: 'Contenu',
         answerMessage_content_label: 'Contenu',
         questionMessage_content_label: 'Contenu',
-
+        stupid_question: 'Aimez-vous les chats?',
         profile_firstname_label: 'Prénom',
         profile_lastname_label: 'Nom',
         profile_email_label: 'Email',
@@ -177,4 +178,13 @@ angular.module('TaskOverflowApp', [
     return function(items) {
             return items? items.slice().reverse() : [];
     };
-});
+})
+
+.filter('capitalize', function() {
+    return function(input, scope) {
+            if (input!=null)
+                    input = input.toLowerCase();
+            return input.substring(0,1).toUpperCase()+input.substring(1);
+    }
+})
+;

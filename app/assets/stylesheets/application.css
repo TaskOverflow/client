@@ -24,6 +24,12 @@
     height: auto;
 }
 
+
+.cat {
+    width: 100%;
+    height: auto;
+}
+
 .fix-image {
     height: 64px;
     width: auto;

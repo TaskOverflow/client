@@ -1,8 +1,13 @@
 <div class="container-fluid">
-        <h1 class="col-sm-offset-2 page-title">{{'home_nav_users' | translate}}</h1>
-        <div class="col-sm-offset-2 col-xs-offset-1 col-sm-8 col-xs-10">
-            <div ng-repeat="user in users" class="col-sm-4 col-xs-12">
-                <div ng-include="'/user/displaySimpleUser'"></div>
-            </div>
+    <h1 class="col-sm-offset-2 page-title">{{'home_nav_users' | translate}}</h1>
+    <div class="col-sm-offset-2 col-xs-offset-1 col-sm-8 col-xs-10" ng-show="isAvailable('user')" >
+        <div ng-repeat="user in users" class="col-sm-4 col-xs-12">
+            <div ng-include="'/user/displaySimpleUser'"></div>
         </div>
+    </div>
+    <div class="col-sm-offset-2 col-xs-offset-1 col-sm-8 col-xs-10" ng-show="!isAvailable('user')" >
+        <div ng-repeat="user in randomUsers" class="col-sm-6 col-xs-12">
+            <div ng-include="'/user/displayRandomUser'"></div>
+        </div>
+    </div>
 </div>

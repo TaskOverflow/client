@@ -19,12 +19,20 @@ angular.module('TaskOverflowApp.user', ['ngRoute'])
         ;
     }])
 
-    .controller('UserCtrl', function ( $scope, $location, $http, Session, $rootScope ) {
+    .controller('UserCtrl', function ( $scope, $location, $http, Session, $rootScope, Features ) {
         $scope.bob = "Je m'appelle Bob.";
+
+        $scope.isAvailable = function(feature) {
+            return Features.isAvailable(feature);
+        };
 
         $http.get($rootScope.SERVER_URL+'user').
         then(function(response) {
             $scope.users = response.data;
+        });
+        $http.get('https://api.randomuser.me/?results=6').
+        then(function(response) {
+            $scope.randomUsers = response.data.results;
         });
     })
 

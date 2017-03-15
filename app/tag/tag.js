@@ -15,7 +15,7 @@ angular.module('TaskOverflowApp.tag', ['ngRoute'])
     ;
 }])
 
-.controller('TagCtrl', function ( $scope, $location, $http, $rootScope ) {
+.controller('TagCtrl', function ( $scope, $location, $http, $rootScope, Features ) {
     $scope.bob = "Je m'appelle Bob.";
 
     $scope.tags1 = [];
@@ -33,6 +33,10 @@ angular.module('TaskOverflowApp.tag', ['ngRoute'])
             side = !side;
         }
     });
+
+    $scope.isAvailable = function(feature) {
+        return Features.isAvailable(feature);
+    };
 })
 
 .controller('TagShowCtrl', function ( $scope, $location, $http, $routeParams, $rootScope ) {
