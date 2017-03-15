@@ -16,15 +16,12 @@ angular.module('TaskOverflowApp', [
 
 .run(function ($rootScope) {
     $rootScope.SERVER_URL="http://localhost:8080/";
-    $rootScope.CONF_SERVER_URL="https://raw.githubusercontent.com/TaskOverflow/conf/master/allok/";       // if you want to test with all features
-    //$rootScope.CONF_SERVER_URL="https://raw.githubusercontent.com/TaskOverflow/conf/master/alldown/";   // if you want to test without features
+    $rootScope.CONF_SERVER_URL="http://localhost:666/";
 })
 
 .config(
     ['$locationProvider', '$routeProvider', '$translateProvider', '$resourceProvider', '$httpProvider', function($locationProvider, $routeProvider, $translateProvider, $resourceProvider, $httpProvider) {
         $locationProvider.hashPrefix('!');
-
-        //$httpProvider.interceptors.push('authInterceptor');
 
         $routeProvider
             .when("/", {
